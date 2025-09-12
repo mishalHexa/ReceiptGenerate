@@ -1,0 +1,22 @@
+{
+  "name": "pdfmake",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "node generateReceipt.js",
+    "upload": "node uploadFile.js",
+    "generate:upload": "npm run generate && npm run upload" 
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
+    "csv-parser": "^3.2.0",
+    "googleapis": "^159.0.0",
+    "node-fetch": "^3.3.2",
+    "pdfmake": "^0.2.20"
+  }
+}
