@@ -9,8 +9,10 @@ const TOKEN_PATH = path.join(process.cwd(), "token.json");
 const parentId = "1EMxgQ-PgZ6KIrFTGyLpQqBSR2UZnBPmU";
 async function loadSavedCredentialsIfExist() {
   try {
-    const content = fs.readFileSync(TOKEN_PATH);
-    const credentials = JSON.parse(content);
+   
+    const credentials = JSON.parse(
+      Buffer.from(process.env.TOKEN_JSON, 'base64').toString('utf8')
+    );
     return google.auth.fromJSON(credentials);
   } catch (err) {
     return null;
@@ -19,7 +21,10 @@ async function loadSavedCredentialsIfExist() {
 
 async function saveCredentials(client) {
   const content = fs.readFileSync(CREDENTIALS_PATH);
-  const keys = JSON.parse(content);
+  // const keys = JSON.parse(content);
+  const keys = JSON.parse(
+    Buffer.from(process.env.CLIENT_SECRET_JSON, 'base64').toString('utf8')
+  );
   const key = keys.installed || keys.web;
   const payload = JSON.stringify({
     type: "authorized_user",
@@ -117,7 +122,7 @@ async function uploadAllFiles(auth) {
   const folderPath = data.filePath; 
   const subFolder = data.subFolder; 
   const files = fs.readdirSync(folderPath); // you can also make this async if needed
-  const folderParentId = await folderExists(drive, subFolder,parentId );
+  let folderParentId = await folderExists(drive, subFolder,parentId );
   if (!folderParentId){
     folderParentId = await createFolder(drive, subFolder,parentId )
   }

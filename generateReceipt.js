@@ -9,8 +9,8 @@ import csv from 'csv-parser';
 import { fileURLToPath } from 'url';
 
 const apiKey = "AIzaSyBCd5mTiIJpEcpAM-I29GUkHNq2KBB6eME";
-const spreadsheetId = "15pV0dVEnY-aHxrI9elsx7JlajG8Phu5oJVGqBYGDJHk";
-const range = "Converted Jul - Sep 25!A1:F57";
+const spreadsheetId = process.env.spreadsheetid;
+const range = process.env.sheetname+"!A1:F57";
 
 const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
 

@@ -5,8 +5,14 @@ name: Generate
 
 on:
   workflow_dispatch:
-  push:
-    branches: ['develop']
+    inputs:
+      sheetname:
+        description: 'Sheet Name'
+        required: true
+      spreadsheetid:
+        description: 'SpreadSheet Id'
+        required: false
+        default: '15pV0dVEnY-aHxrI9elsx7JlajG8Phu5oJVGqBYGDJHk'
 
 jobs:
   deploy:
@@ -24,4 +30,7 @@ jobs:
         env:
           CLIENT_SECRET_JSON: ${{ secrets.CLIENT_SECRET_JSON }}
           TOKEN_JSON: ${{ secrets.TOKEN_JSON }}
+          sheetname: ${{ github.event.inputs.sheetname }}
+          spreadsheetid: ${{ github.event.inputs.spreadsheetid }}
+          apiKey: ${{ secrets.API_KEY }}
         run: npm run generate:upload
