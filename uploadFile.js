@@ -122,7 +122,7 @@ async function uploadAllFiles(auth) {
   const folderPath = data.filePath; 
   const subFolder = data.subFolder; 
   const files = fs.readdirSync(folderPath); // you can also make this async if needed
-  const folderParentId = await folderExists(drive, subFolder,parentId );
+  let folderParentId = await folderExists(drive, subFolder,parentId );
   if (!folderParentId){
     folderParentId = await createFolder(drive, subFolder,parentId )
   }
