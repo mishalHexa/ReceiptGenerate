@@ -167,7 +167,7 @@ function convertRow(row, serial) {
 
 function getQuarterMonths(month) {
     const quarter = Math.ceil(month / 3);
-    const startMonthIndex = quarter * 3;
+    const startMonthIndex = (quarter-1) * 3;
     const endMonthIndex = startMonthIndex + 2;    // Return 1-indexed month numbers for user clarity
     return {
         startMonth: startMonthIndex + 1,
