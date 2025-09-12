@@ -8,7 +8,7 @@ import csv from 'csv-parser';
 
 import { fileURLToPath } from 'url';
 
-const apiKey = process.env.API_KEY;
+const apiKey = "AIzaSyBCd5mTiIJpEcpAM-I29GUkHNq2KBB6eME";
 const spreadsheetId = process.env.spreadsheetid;
 const range = process.env.sheetname+"!A1:F57";
 
