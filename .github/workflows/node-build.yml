@@ -9,7 +9,6 @@ on:
       sheetname:
         description: 'Sheet Name'
         required: true
-        default: 'staging'
       spreadsheetid:
         description: 'SpreadSheet Id'
         required: false
