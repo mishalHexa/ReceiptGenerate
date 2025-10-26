@@ -134,7 +134,7 @@ function convertRow(row, serial) {
 
     const payment_for = getPaymentForDetail(dateParts[1]);
     // Receipt no
-    const receiptNo = `${dateParts[2]}${payment_for.quarter}${String(serial).padStart(2, '0')}`;
+    const receiptNo = `${dateParts[2]}${String(payment_for.quarter).padStart(2, '0')}${String(serial).padStart(2, '0')}`;
     // Amount
     const amount = parseInt(row["Amount Paid"]);
 
