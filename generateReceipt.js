@@ -38,7 +38,7 @@ function toGujaratiDigits(numStr) {
 }
 
 function convertFileName(flat, quarter) {
-    const fileName = "Receipts/"+quarter+"/"+flat.replaceAll(" ", "_")+".pdf";
+    const fileName = "Receipts/"+quarter+"/"+flat.replaceAll(" ", "_")+"_"+quarter+".pdf";
     if (!fs.existsSync("Receipts/"+quarter+"/")){
       console.log("Create")
       fs.mkdirSync("Receipts/"+quarter,  { recursive: true });
