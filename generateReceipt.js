@@ -124,6 +124,9 @@ function convertRow(row, serial) {
         row[key.trim()] = row[key]?.trim();
     }
     // Date
+    if (row["Payment Date"] == null || row["Payment Date"] == "") {
+        return null; // Skip empty rows
+    }
     const dateParts = row["Payment Date"].split(' ');
     const day = toGujaratiDigits(dateParts[0]);
     const month = monthMap[dateParts[1]] || dateParts[1];
@@ -517,20 +520,20 @@ function createReceiptPDF({
         absolutePosition: { x: 290, y: yAlign.sign - 35 },
       },
       // 🔲 Signature box
-      // {
-      //   canvas: [
-      //     {
-      //       type: "rect",
-      //       x: 320,
-      //       y: -50,
-      //       w: 50,
-      //       h: 50,
-      //       lineWidth: 1,
-      //       lineColor: borderColor,
-      //       absolutePosition: { x: 0, y: 0 },
-      //     },
-      //   ],
-      // },
+      {
+        canvas: [
+          {
+            type: "rect",
+            x: 310,
+            y: -50,
+            w: 50,
+            h: 50,
+            lineWidth: 1,
+            lineColor: borderColor,
+            absolutePosition: { x: 0, y: 0 },
+          },
+        ],
+      },
       
       {
         text: "નાણાં લેનારની સહી",
@@ -569,8 +572,10 @@ async function readSheet() {
             obj[key] = row[idx] || null;
         });
         const result =  convertRow(obj, serial);
-        createReceiptPDF(result);
-        return result;
+        if (result !== null) {
+          createReceiptPDF(result);
+          return result;
+        }
     });
 
 }
